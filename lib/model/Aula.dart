@@ -1,5 +1,5 @@
 import 'package:academia_de_herois/model/Pacote.dart';
-import 'package:academia_de_herois/model/Util.dart';
+import 'package:academia_de_herois/util/Util.dart';
 import 'package:academia_de_herois/model/pessoa/Aluno.dart';
 import 'package:academia_de_herois/model/pessoa/Professor.dart';
 
@@ -12,7 +12,7 @@ class Aula{
   int materia;
   int situacao;
 
-  String situacaoNome() => Util.situacoes[situacao];
-  String materiaNome() => Util.materias[materia];
+  String situacaoNome() => situacoes[situacao];
+  String materiaNome() => materias[materia];
 
 }
