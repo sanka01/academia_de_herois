@@ -56,3 +56,36 @@ class _PaginaInicialState extends State<PaginaInicial> {
         )));
   }
 }
+
+class BoxSelect {
+  List itens;
+
+  String _itemSelecionado;
+
+  String get itemSelecionado => _itemSelecionado;
+
+  List<DropdownMenuItem<String>> dropDownItens;
+
+  BoxSelect(this.itens, this.dropDownItens) {
+    dropDownItens = getDropDownItens();
+    _itemSelecionado = itens.first.toString();
+  }
+
+  List<DropdownMenuItem<String>> getDropDownItens() {
+    List<DropdownMenuItem<String>> items = new List();
+    for (var item in itens) {
+      items.add(new DropdownMenuItem(
+          value: item.toString(),
+          child: new Text(
+            item.toString(),
+            style: TextStyle(color: Colors.black, fontSize: 15),
+          )));
+    }
+    return items;
+  }
+
+  String changedDropDownItem(String itemSelecionado) {
+    _itemSelecionado = itemSelecionado;
+    return _itemSelecionado;
+  }
+}

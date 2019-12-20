@@ -5,12 +5,7 @@ abstract class Pessoa{
   String cpf;
   String contato;
 
-  Pessoa(){
-    nome = "";
-    idade = 0;
-    aniversario = DateTime.now();
-    cpf = "";
-    contato = "";
-  }
+  Pessoa(this.nome);
+
 
 }

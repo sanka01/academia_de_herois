@@ -25,19 +25,16 @@ class Professor extends Pessoa {
 
   List<String> anotacoes;
 
+  Professor(this._horariosIndisponiveis, String nome) : super(nome);
+
   @override
   String toString() {
-    return nome +
-        "| Horarios Indisponiveis:" +
-        _horariosIndisponiveis.join(" ") +
-        "| Horarios Disponiveis: " +
-        horariosDisponiveis.join(" ");
-  }
-
-  Professor() {
-    super.nome = "";
-    horariosIndisponiveis = Set();
-    horariosDisponiveis = Set();
+    return nome;
+//        +
+//        "| Horarios Indisponiveis:" +
+//        _horariosIndisponiveis.join(" ") +
+//        "| Horarios Disponiveis: " +
+//        horariosDisponiveis.join(" ");
   }
 
   String addHorario(int tipo, List horario) {

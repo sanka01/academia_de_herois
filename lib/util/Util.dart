@@ -59,5 +59,12 @@ Map<String, int> tipos = {
   "Aluno": 3
 };
 
-
 Professor usuario;
+
+List<Professor> professores = [
+  Professor({[1,13],[1,14],[1,15],[1,16]}, "João"),
+  Professor({}, "Amanda"),
+  Professor({[6,8],[6,9]}, "Daniel")
+];
+
+//  Professor(this._horariosDisponiveis, this._horariosIndisponiveis, String nome)

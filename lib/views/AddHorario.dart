@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:academia_de_herois/util/Util.dart';
 
+import '../main.dart';
+
 class PaginaAddHorario extends StatefulWidget {
   @override
   _PaginaAddHorarioState createState() => _PaginaAddHorarioState();
@@ -13,9 +15,9 @@ class _PaginaAddHorarioState extends State<PaginaAddHorario> {
   List<DropdownMenuItem<String>> _dropDownHoras;
   List<DropdownMenuItem<String>> _dropDownTipos;
 
-  _BoxSelect dropDownDias;
-  _BoxSelect dropDownHora;
-  _BoxSelect dropDownTipo;
+  BoxSelect dropDownDias;
+  BoxSelect dropDownHora;
+  BoxSelect dropDownTipo;
 
   String status = "";
 
@@ -41,10 +43,10 @@ class _PaginaAddHorarioState extends State<PaginaAddHorario> {
 
   _add() {
     List horario = [
-      dropDownDias._itens[dropDownDias._itemSelecionado],
-      dropDownHora._itens[dropDownHora._itemSelecionado]
+      diasSemana[dropDownDias.itemSelecionado],
+      diasSemana[dropDownHora.itemSelecionado]
     ];
-    int tipo = dropDownTipo._itens[dropDownTipo._itemSelecionado];
+    int tipo = tipos[dropDownTipo.itemSelecionado];
     setState(() {
       status = usuario.addHorario(tipo, horario);
     });
@@ -52,9 +54,9 @@ class _PaginaAddHorarioState extends State<PaginaAddHorario> {
 
   @override
   void initState() {
-    dropDownDias = _BoxSelect(diasSemana, _dropDownDiasSemana);
-    dropDownHora = _BoxSelect(horas, _dropDownHoras);
-    dropDownTipo = _BoxSelect(tipos, _dropDownTipos);
+    dropDownDias = BoxSelect(diasSemana.keys.toList(), _dropDownDiasSemana);
+    dropDownHora = BoxSelect(horas.keys.toList(), _dropDownHoras);
+    dropDownTipo = BoxSelect(tipos.keys.toList(), _dropDownTipos);
     super.initState();
   }
 
@@ -80,52 +82,27 @@ class _PaginaAddHorarioState extends State<PaginaAddHorario> {
                             TextStyle(color: Colors.blueAccent, fontSize: 30.0),
                       ),
                       DropdownButton(
-                        value: dropDownDias._itemSelecionado,
-                        items: dropDownDias._dropDownItens,
+                        value: dropDownDias.itemSelecionado,
+                        items: dropDownDias.dropDownItens,
                         onChanged: changedDropDownDias,
                       ),
                       DropdownButton(
-                        value: dropDownHora._itemSelecionado,
-                        items: dropDownHora._dropDownItens,
+                        value: dropDownHora.itemSelecionado,
+                        items: dropDownHora.dropDownItens,
                         onChanged: changedDropDownHoras,
                       ),
                       DropdownButton(
-                        value: dropDownTipo._itemSelecionado,
-                        items: dropDownTipo._dropDownItens,
+                        value: dropDownTipo.itemSelecionado,
+                        items: dropDownTipo.dropDownItens,
                         onChanged: changedDropDownTipos,
                       ),
                       FlatButton(
-                        child: Text("Add"),
+                        child: Text("Adicionar"),
                         onPressed: _add,
                         color: Colors.white,
                       ),
                     ],
                   ),
                 ))));
-  }
-}
-
-class _BoxSelect {
-  Map<String, int> _itens;
-
-  String _itemSelecionado;
-  List<DropdownMenuItem<String>> _dropDownItens;
-
-  _BoxSelect(this._itens, this._dropDownItens) {
-    _dropDownItens = getDropDownItens();
-    _itemSelecionado = _itens.keys.first;
-  }
-
-  List<DropdownMenuItem<String>> getDropDownItens() {
-    List<DropdownMenuItem<String>> items = new List();
-    for (String item in _itens.keys.toList()) {
-      items.add(new DropdownMenuItem(value: item, child: new Text(item)));
-    }
-    return items;
-  }
-
-  String changedDropDownItem(String itemSelecionado) {
-    _itemSelecionado = itemSelecionado;
-    return _itemSelecionado;
   }
 }

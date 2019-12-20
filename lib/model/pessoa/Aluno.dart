@@ -6,5 +6,7 @@ class Aluno extends Pessoa{
   Responsavel responsavel;
   List<Pacote> pacotesComprados;
 
+  Aluno(String nome) : super(nome);
+
 
 }
