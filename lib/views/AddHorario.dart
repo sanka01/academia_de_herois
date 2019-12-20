@@ -1,4 +1,3 @@
-import 'package:academia_de_herois/model/pessoa/Professor.dart';
 import 'package:flutter/material.dart';
 import 'package:academia_de_herois/util/Util.dart';
 
@@ -63,7 +62,7 @@ class _PaginaAddHorarioState extends State<PaginaAddHorario> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Testes"),
+          title: Text("Horario Semanal"),
           centerTitle: true,
         ),
         body: SingleChildScrollView(

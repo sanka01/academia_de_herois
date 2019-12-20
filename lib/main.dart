@@ -1,13 +1,17 @@
 import 'package:academia_de_herois/util/Util.dart';
-import 'package:academia_de_herois/model/pessoa/Professor.dart';
 import 'package:academia_de_herois/views/AddHorario.dart';
+import 'package:academia_de_herois/views/Agendamento.dart';
 import 'package:flutter/material.dart';
 
-void main() =>
-    runApp(MaterialApp(
-      title: "Academia de Herois", home: PaginaInicial(),
-      routes:  {"/home": (context) => PaginaInicial(),
-      "/AddHorario": (context) => PaginaAddHorario()},));
+void main() => runApp(MaterialApp(
+      title: "Academia de Herois",
+      home: PaginaInicial(),
+      routes: {
+        "/home": (context) => PaginaInicial(),
+        "/AddHorario": (context) => PaginaAddHorario(),
+        "/AgendarAula": (context) => PaginaAgendamento()
+      },
+    ));
 
 class PaginaInicial extends StatefulWidget {
   @override
@@ -30,19 +34,25 @@ class _PaginaInicialState extends State<PaginaInicial> {
         ),
         body: SingleChildScrollView(
             child: Column(
-              children: <Widget>[
-                Text(usuario.toString()),
-                Center(
-                  child: RaisedButton(
-                      child: Text("Add Horario"),
-                      onPressed: () {
-                        // Navigate to the second screen using a named route.
-                        Navigator.pushNamed(context, '/AddHorario');
-                      }
-                  ),
-                )
-              ],
-            )));
+          children: <Widget>[
+            Text(usuario.toString()),
+            Center(
+              child: RaisedButton(
+                  child: Text("Add Horario"),
+                  onPressed: () {
+                    // Navigate to the second screen using a named route.
+                    Navigator.pushNamed(context, '/AddHorario');
+                  }),
+            ),
+            Center(
+              child: RaisedButton(
+                  child: Text("Agendar"),
+                  onPressed: () {
+                    // Navigate to the second screen using a named route.
+                    Navigator.pushNamed(context, '/AgendarAula');
+                  }),
+            )
+          ],
+        )));
   }
 }
-
