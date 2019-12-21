@@ -20,14 +20,10 @@ class PaginaInicial extends StatefulWidget {
 
 class _PaginaInicialState extends State<PaginaInicial> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+  void initState() => super.initState();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text("Testes"),
           centerTitle: true,
@@ -54,7 +50,6 @@ class _PaginaInicialState extends State<PaginaInicial> {
             )
           ],
         )));
-  }
 }
 
 class BoxSelect {

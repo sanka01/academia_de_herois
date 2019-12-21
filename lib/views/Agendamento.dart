@@ -2,6 +2,7 @@ import 'package:academia_de_herois/main.dart';
 import 'package:academia_de_herois/util/Util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 
 class PaginaAgendamento extends StatefulWidget {
   @override
@@ -28,6 +29,13 @@ class _PaginaAgendamentoState extends State {
     super.initState();
   }
 
+  String _getDataEscolhida() {
+    if (_data == null) {
+      return "";
+    }
+    return "${_data.day}/${_data.month}/${_data.year} - ${_data.hour}:${_data.minute}";
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -51,17 +59,22 @@ class _PaginaAgendamentoState extends State {
                   onPressed: () {
                     showDatePicker(
                             context: context,
-                            initialDate:_data == null ? DateTime.now(): _data,
-                            firstDate: DateTime(2019),
-                            lastDate: DateTime(2021))
+                            initialDate: _data == null ? DateTime.now() : _data,
+                            firstDate: DateTime.now().add(Duration(days: -1)),
+                            lastDate: DateTime(2021, 12, 31))
                         .then((data) {
-                          setState(() {
-                            _data = data;
-                          });
+                      showTimePicker(
+                              context: context, initialTime: TimeOfDay.now())
+                          .then((dataDia) {
+                        setState(() {
+                          _data = Jiffy(data).add(
+                              hours: dataDia.hour, minutes: dataDia.minute);
+                        });
+                      });
                     });
                   },
                 ),
-                Text("data escolhida: ${_data.day}/${_data.month}/${_data.year}")
+                Text("data escolhida: " + _getDataEscolhida())
               ],
             ),
           ),
