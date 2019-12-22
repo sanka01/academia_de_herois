@@ -2,7 +2,6 @@ import 'package:academia_de_herois/main.dart';
 import 'package:academia_de_herois/util/Util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:jiffy/jiffy.dart';
 
 class PaginaAgendamento extends StatefulWidget {
   @override
@@ -33,7 +32,7 @@ class _PaginaAgendamentoState extends State {
     if (_data == null) {
       return "";
     }
-    return "${_data.day}/${_data.month}/${_data.year} - ${_data.hour}:${_data.minute}";
+    return "data escolhida: ${_data.day}/${_data.month}/${_data.year} - ${_data.hour}:${_data.minute}";
   }
 
   @override
@@ -54,27 +53,50 @@ class _PaginaAgendamentoState extends State {
                   items: dropDownProfessores.dropDownItens,
                   onChanged: changedDropDownProfessores,
                 ),
-                FlatButton(
+                RaisedButton(
                   child: Text("Escolha o horario"),
                   onPressed: () {
                     showDatePicker(
-                            context: context,
-                            initialDate: _data == null ? DateTime.now() : _data,
-                            firstDate: DateTime.now().add(Duration(days: -1)),
-                            lastDate: DateTime(2021, 12, 31))
-                        .then((data) {
+                      builder: (BuildContext context, Widget child) {
+                        return Theme(
+                          data: ThemeData.light(),
+                          child: child,
+                        );
+                      },
+                      context: context,
+                      initialDate: _data == null ? DateTime.now() : _data,
+                      firstDate: DateTime.now().add(Duration(days: -1)),
+                      lastDate: DateTime(2020, 12, 31),
+                      selectableDayPredicate: (DateTime val) => professores
+                              .firstWhere((professor) =>
+                                  professor.nome ==
+                                  dropDownProfessores.itemSelecionado)
+                              .horariosIndisponiveis
+                              .containsKey(val.weekday)
+                          ? false
+                          : true,
+                    ).then((data) {
                       showTimePicker(
-                              context: context, initialTime: TimeOfDay.now())
-                          .then((dataDia) {
+                              context: context,
+                              builder: (BuildContext context, Widget child){
+                                return Theme(
+                                  data: ThemeData.light(),
+                                  child: child,
+                                );
+                              },
+                              initialTime: _data == null
+                                  ? TimeOfDay.now()
+                                  : TimeOfDay.fromDateTime(_data))
+                          .then((horario) {
                         setState(() {
-                          _data = Jiffy(data).add(
-                              hours: dataDia.hour, minutes: dataDia.minute);
+                          _data = DateTime(data.year, data.month, data.day,
+                              horario.hour, horario.minute);
                         });
                       });
                     });
                   },
                 ),
-                Text("data escolhida: " + _getDataEscolhida())
+                Text(_getDataEscolhida())
               ],
             ),
           ),
