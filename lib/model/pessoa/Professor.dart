@@ -5,27 +5,15 @@ import 'package:academia_de_herois/model/pessoa/Pessoa.dart';
 class Professor extends Pessoa {
   List<Aula> aulas;
   int horasLivres;
-  Set _horariosDisponiveis;
+  Set horariosDisponiveis;// [DiaSemana, HoraInicio], periodo de 1 hora
 
-  Set get horariosDisponiveis => _horariosDisponiveis;
-
-  set horariosDisponiveis(Set horariosPreferenciais) {
-    _horariosDisponiveis = horariosPreferenciais;
-  } // [DiaSemana, HoraInicio], periodo de 1 hora
-
-  Set _horariosIndisponiveis;
-
-  Set get horariosIndisponiveis => _horariosIndisponiveis;
-
-  set horariosIndisponiveis(Set horariosIndisponiveis) {
-    _horariosIndisponiveis = horariosIndisponiveis;
-  } // [DiaSemana, HoraInicio], periodo de 1 hora
+  Set horariosIndisponiveis;// [DiaSemana, HoraInicio], periodo de 1 hora
 
   Map<DateTime, DateTime> horariosIndisponiveisByData;
 
   List<String> anotacoes;
 
-  Professor(this._horariosIndisponiveis, String nome) : super(nome);
+  Professor(this.horariosIndisponiveis, String nome) : super(nome);
 
   @override
   String toString() {
