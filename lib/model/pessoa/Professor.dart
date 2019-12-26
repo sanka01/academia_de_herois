@@ -5,15 +5,28 @@ import 'package:academia_de_herois/model/pessoa/Pessoa.dart';
 class Professor extends Pessoa {
   List<Aula> aulas;
   int horasLivres;
-  Set horariosDisponiveis;// [DiaSemana, HoraInicio], periodo de 1 hora
+  Map<int, int> _horariosDisponiveis;
 
-  Set horariosIndisponiveis;// [DiaSemana, HoraInicio], periodo de 1 hora
+  Map<int,int> get horariosDisponiveis => _horariosDisponiveis;
+
+  set horariosDisponiveis(Map<int,int> horariosPreferenciais) {
+    _horariosDisponiveis = horariosPreferenciais;
+  } // [DiaSemana, HoraInicio], periodo de 1 hora
+
+  Map<int,int> _horariosIndisponiveis;
+
+  Map<int,int> get horariosIndisponiveis => _horariosIndisponiveis;
+
+  set horariosIndisponiveis(Map<int,int> horariosIndisponiveis) {
+    _horariosIndisponiveis = horariosIndisponiveis;
+  } // [DiaSemana, HoraInicio], periodo de 1 hora
 
   Map<DateTime, DateTime> horariosIndisponiveisByData;
 
   List<String> anotacoes;
 
-  Professor(this.horariosIndisponiveis, String nome) : super(nome);
+  Professor(this._horariosIndisponiveis, String nome) : super(nome);
+
 
   @override
   String toString() {
@@ -25,32 +38,32 @@ class Professor extends Pessoa {
 //        horariosDisponiveis.join(" ");
   }
 
-  String addHorario(int tipo, List horario) {
-    if (isHorarioOcupado(horario)) {
-      return "Horario já esta preenchido";
-    }
+  String addHorario(int tipo, Map horario) {
+//    if (isHorarioOcupado(horario)) {
+//      return "Horario já esta preenchido";
+//    }
     switch (tipo) {
       case 0:
         {
-          horariosDisponiveis.add(horario);
+          horariosDisponiveis.addAll(horario);
           return "Horario disponivel adicionado";
         }
         break;
       case 1:
         {
-          horariosIndisponiveis.add(horario);
+          horariosIndisponiveis.addAll(horario);
           return "Horario Indisponivel adicionado";
         }
         break;
       case 2:
         {
-          horariosIndisponiveis.add(horario);
+          horariosIndisponiveis.addAll(horario);
           return "Horario Indisponivel adicionado";
         }
         break;
       case 3:
         {
-          horariosIndisponiveis.add(horario);
+          horariosIndisponiveis.addAll(horario);
           return "Horario Indisponivel adicionado";
         }
       default:
@@ -58,14 +71,14 @@ class Professor extends Pessoa {
     }
   }
 
-  bool isHorarioOcupado(List horario) {
-    bool status = false;
-    horariosIndisponiveis.forEach((f) {
-      if (horario[0] == f[0] && horario[1] == f[1]) status = true;
-    });
-    horariosDisponiveis.forEach((f) {
-      if (horario[0] == f[0] && horario[1] == f[1]) status = true;
-    });
-    return status;
-  }
+//  bool isHorarioOcupado(List horario) {
+//    bool status = false;
+//    horariosIndisponiveis.forEach((f) {
+//      if (horario[0] == f[0] && horario[1] == f[1]) status = true;
+//    });
+//    horariosDisponiveis.forEach((f) {
+//      if (horario[0] == f[0] && horario[1] == f[1]) status = true;
+//    });
+//    return status;
+//  }
 }

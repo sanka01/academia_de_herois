@@ -42,10 +42,10 @@ class _PaginaAddHorarioState extends State<PaginaAddHorario> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   _add() {
-    List horario = [
-      diasSemana[dropDownDias.itemSelecionado],
-      diasSemana[dropDownHora.itemSelecionado]
-    ];
+    Map horario = {
+      diasSemana[dropDownDias.itemSelecionado]:
+          diasSemana[dropDownHora.itemSelecionado]
+    };
     int tipo = tipos[dropDownTipo.itemSelecionado];
     setState(() {
       status = usuario.addHorario(tipo, horario);

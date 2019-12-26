@@ -28,6 +28,13 @@ class _PaginaAgendamentoState extends State {
     super.initState();
   }
 
+  String _getDataEscolhida() {
+    if (_data == null) {
+      return "";
+    }
+    return "data escolhida: ${_data.day}/${_data.month}/${_data.year} - ${_data.hour}:${_data.minute}";
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -46,22 +53,50 @@ class _PaginaAgendamentoState extends State {
                   items: dropDownProfessores.dropDownItens,
                   onChanged: changedDropDownProfessores,
                 ),
-                FlatButton(
+                RaisedButton(
                   child: Text("Escolha o horario"),
                   onPressed: () {
                     showDatePicker(
-                            context: context,
-                            initialDate:_data == null ? DateTime.now(): _data,
-                            firstDate: DateTime(2019),
-                            lastDate: DateTime(2021))
-                        .then((data) {
-                          setState(() {
-                            _data = data;
-                          });
+                      builder: (BuildContext context, Widget child) {
+                        return Theme(
+                          data: ThemeData.light(),
+                          child: child,
+                        );
+                      },
+                      context: context,
+                      initialDate: _data == null ? DateTime.now() : _data,
+                      firstDate: DateTime.now().add(Duration(days: -1)),
+                      lastDate: DateTime(2020, 12, 31),
+                      selectableDayPredicate: (DateTime val) => professores
+                              .firstWhere((professor) =>
+                                  professor.nome ==
+                                  dropDownProfessores.itemSelecionado)
+                              .horariosIndisponiveis
+                              .containsKey(val.weekday)
+                          ? false
+                          : true,
+                    ).then((data) {
+                      showTimePicker(
+                              context: context,
+                              builder: (BuildContext context, Widget child){
+                                return Theme(
+                                  data: ThemeData.light(),
+                                  child: child,
+                                );
+                              },
+                              initialTime: _data == null
+                                  ? TimeOfDay.now()
+                                  : TimeOfDay.fromDateTime(_data))
+                          .then((horario) {
+                        setState(() {
+                          _data = DateTime(data.year, data.month, data.day,
+                              horario.hour, horario.minute);
+                        });
+                      });
                     });
                   },
                 ),
-                Text("data escolhida: ${_data.day}/${_data.month}/${_data.year}")
+                Text(_getDataEscolhida())
               ],
             ),
           ),
