@@ -1,4 +1,4 @@
-abstract class Pessoa {
+class Pessoa {
   int id;
   String nome;
   String usuario;
@@ -17,9 +17,16 @@ abstract class Pessoa {
 
   Pessoa.login(this.email, this.senha);
 
-  Pessoa(this.nome);
+
+  Pessoa(this.nome, [this.id, this.usuario, this.senha, this.idade,
+      this.aniversario, this.sexo, this.cpf, this.contato, this.email, this.bio,
+      this.endereco, this.dataCriacao]);
 
   Pessoa.novoUsuario(this.nome, this.contato, this.email, this.senha);
+
+  bool salvar(){
+    return true;
+  }
 }
 
 class _Endereco {

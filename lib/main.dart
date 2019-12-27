@@ -1,15 +1,19 @@
 import 'package:academia_de_herois/util/Util.dart';
 import 'package:academia_de_herois/views/AddHorario.dart';
 import 'package:academia_de_herois/views/Agendamento.dart';
+import 'package:academia_de_herois/views/Cadastro.dart';
+import 'package:academia_de_herois/views/Login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(MaterialApp(
     title: "Academia de Herois",
-    home: PaginaInicial(),
+    home: PaginaTestes(),
     routes: {
-      "/home": (context) => PaginaInicial(),
+      "/home": (context) => PaginaTestes(),
       "/AddHorario": (context) => PaginaAddHorario(),
+      "/Login": (context) => PaginaLogin(),
+      "/Cadastro": (context) => PaginaCadastro(),
       "/AgendarAula": (context) => PaginaAgendamento()
     },
     localizationsDelegates: [
@@ -22,12 +26,12 @@ void main() => runApp(MaterialApp(
     supportedLocales: {Locale('pt', 'BR'), Locale('en')}
     ));
 
-class PaginaInicial extends StatefulWidget {
+class PaginaTestes extends StatefulWidget {
   @override
-  _PaginaInicialState createState() => _PaginaInicialState();
+  _PaginaTestesState createState() => _PaginaTestesState();
 }
 
-class _PaginaInicialState extends State<PaginaInicial> {
+class _PaginaTestesState extends State<PaginaTestes> {
   @override
   void initState() => super.initState();
 
@@ -56,7 +60,15 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   // Navigate to the second screen using a named route.
                   Navigator.pushNamed(context, '/AgendarAula');
                 }),
-          )
+          ),
+          Center(
+            child: RaisedButton(
+                child: Text("Login"),
+                onPressed: () {
+                  // Navigate to the second screen using a named route.
+                  Navigator.pushNamed(context, '/Login');
+                }),
+          ),
         ],
       )));
 }
