@@ -77,7 +77,7 @@ class _PaginaAgendamentoState extends State {
                     ).then((data) {
                       showTimePicker(
                               context: context,
-                              builder: (BuildContext context, Widget child){
+                              builder: (BuildContext context, Widget child) {
                                 return Theme(
                                   data: ThemeData.light(),
                                   child: child,
@@ -100,5 +100,6 @@ class _PaginaAgendamentoState extends State {
             ),
           ),
         ),
+        bottomNavigationBar: getBottonBar(context),
       );
 }

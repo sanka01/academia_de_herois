@@ -1,8 +1,8 @@
+import 'package:academia_de_herois/model/pessoa/Aluno.dart';
 import 'package:academia_de_herois/model/pessoa/Pessoa.dart';
 import 'package:academia_de_herois/model/pessoa/Professor.dart';
 
 final String uri = "http://app.academiadeherois.online/get.php";
-
 
 Map<int, String> get situacoes =>
     {1: "Finalizada", 2: "Estudante Ausente", 3: "Remarcada"};
@@ -63,14 +63,15 @@ Map<String, int> tipos = {
   "Aluno": 3
 };
 
-Pessoa usuario = Pessoa(
-    nome: "sanka",
-);
+Pessoa usuario = Aluno(
+    nome: "aluno",
+    dataCriacao: DateTime(2019, 5, 30),
+    bio: "Minha biografia é muito curta");
 List<Pessoa> usuarios = [];
 List<Professor> professores = [
-  Professor({1: 13, 1: 14, 1: 15, 1: 16}, "João"),
-  Professor({}, "Amanda"),
-  Professor({6: 8, 6: 9}, "Daniel")
+  Professor(horariosIndisponiveis: {1: 13, 1: 14, 1: 15, 1: 16}, nome: "João"),
+  Professor(horariosIndisponiveis: {}, nome: "Amanda"),
+  Professor(horariosIndisponiveis: {6: 8, 6: 9}, nome: "Daniel")
 ];
 
 //  Professor(this._horariosDisponiveis, this._horariosIndisponiveis, String nome)

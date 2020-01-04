@@ -13,7 +13,43 @@ class Professor extends Pessoa {
 
   List<String> anotacoes;
 
-  Professor(this.horariosIndisponiveis, String nome) : super(nome: nome);
+  Professor({
+    nome,
+    id,
+    bio,
+    usuario,
+    dataCriacao,
+    imagemPerfil,
+    contato,
+    aniversario,
+    idade,
+    cpf,
+    email,
+    endereco,
+    senha,
+    sexo,
+    this.horariosIndisponiveis,
+    this.anotacoes,
+    this.aulas,
+    this.horariosDisponiveis,
+    this.horariosIndisponiveisByData,
+    this.horasLivres
+  }) : super(
+    nome: nome,
+    id: id,
+    bio: bio,
+    usuario: usuario,
+    dataCriacao: dataCriacao,
+    imagemPerfil: imagemPerfil,
+    contato: contato,
+    aniversario: aniversario,
+    idade: idade,
+    cpf: cpf,
+    email: email,
+    endereco: endereco,
+    senha: senha,
+    sexo: sexo,
+  );
 
 
   @override

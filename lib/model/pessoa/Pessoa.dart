@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:academia_de_herois/util/Util.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart' as http;
 
 class Pessoa {
   int id;
@@ -46,14 +43,10 @@ class Pessoa {
   });
 
   factory Pessoa.fromJson(Map<String, dynamic> json) {
-    debugPrint("Tentando criar nova Pessoa");
-    Pessoa pessoa = Pessoa(
+    return Pessoa(
       nome: json['nome'],
       id: int.parse(json['id']),
     );
-
-    debugPrint("Nova pessoa: " + pessoa.toString());
-    return pessoa;
   }
 
   Pessoa.novoUsuario(this.nome, this.contato, this.email, this.senha);

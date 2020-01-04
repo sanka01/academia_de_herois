@@ -1,3 +1,5 @@
+import 'package:academia_de_herois/model/pessoa/Professor.dart';
+import 'package:academia_de_herois/model/pessoa/Responsavel.dart';
 import 'package:academia_de_herois/util/Util.dart';
 import 'package:academia_de_herois/views/AddHorario.dart';
 import 'package:academia_de_herois/views/Agendamento.dart';
@@ -5,13 +7,16 @@ import 'package:academia_de_herois/views/Cadastro.dart';
 import 'package:academia_de_herois/views/Login.dart';
 import 'package:academia_de_herois/views/partials/partials.dart';
 import 'package:academia_de_herois/views/perfilUsuario.dart';
-import 'package:academia_de_herois/views/testeDB.dart';
-import 'package:academia_de_herois/views/testeDB2.dart';
+import 'package:academia_de_herois/views/ListarPessoas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'model/pessoa/Aluno.dart';
+
 void main() => runApp(MaterialApp(
     title: "Academia de Herois",
+    debugShowCheckedModeBanner: false,
+    checkerboardOffscreenLayers: true,
     home: PaginaTestes(),
     routes: {
       "/home": (context) => PaginaTestes(),
@@ -20,8 +25,7 @@ void main() => runApp(MaterialApp(
       "/Cadastro": (context) => PaginaCadastro(),
       "/PerfilUsuario": (context) => PaginaPerfilUsuario(),
       "/AgendarAula": (context) => PaginaAgendamento(),
-      "/TesteDB": (context) => TesteDB(),
-      "/TesteDB2": (context) => TesteDB2(),
+      "/ListarPessoas": (context) => ListarPessoas(),
     },
     localizationsDelegates: [
       // ... app-specific localization delegate[s] here
@@ -43,70 +47,97 @@ class _PaginaTestesState extends State<PaginaTestes> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: getAppBar("Testes"),
-      body: SingleChildScrollView(
-          child: Column(
-        children: <Widget>[
-          Text(usuario.toString()),
-          Center(
-            child: RaisedButton(
-                child: Text("Add Horario"),
-                onPressed: () {
-                  // Navigate to the second screen using a named route.
-                  Navigator.pushNamed(context, '/AddHorario');
-                }),
-          ),
-          Center(
-            child: RaisedButton(
-                child: Text("Agendar"),
-                onPressed: () {
-                  // Navigate to the second screen using a named route.
-                  Navigator.pushNamed(context, '/AgendarAula');
-                }),
-          ),
-          Center(
-            child: RaisedButton(
-                child: Text("Login"),
-                onPressed: () {
-                  // Navigate to the second screen using a named route.
-                  Navigator.pushNamed(context, '/Login');
-                }),
-          ),
-          Center(
-            child: RaisedButton(
-                child: Text("Cadastrar"),
-                onPressed: () {
-                  // Navigate to the second screen using a named route.
-                  Navigator.pushNamed(context, '/Cadastro');
-                }),
-          ),
-          Center(
-            child: RaisedButton(
-                child: Text("Perfil Usuario"),
-                onPressed: () {
-                  // Navigate to the second screen using a named route.
-                  Navigator.pushNamed(context, '/PerfilUsuario');
-                }),
-          ),
-          Center(
-            child: RaisedButton(
-                child: Text("Listar Usuario via MySQL1"),
-                onPressed: () {
-                  // Navigate to the second screen using a named route.
-                  Navigator.pushNamed(context, '/TesteDB');
-                }),
-          ),
-          Center(
-            child: RaisedButton(
-                child: Text("Listar Usuario via Requisição JSON"),
-                onPressed: () {
-                  // Navigate to the second screen using a named route.
-                  Navigator.pushNamed(context, '/TesteDB2');
-                }),
-          ),
-
-        ],
-      )));
+        appBar: getAppBar("Testes"),
+        body: SingleChildScrollView(
+            child: Column(
+          children: <Widget>[
+            Text(
+              "Perfil atual: $usuario",
+              style: TextStyle(fontSize: 20),
+            ),
+            Center(
+              child: RaisedButton(
+                  child: Text("Add Horario"),
+                  onPressed: () {
+                    // Navigate to the second screen using a named route.
+                    Navigator.pushNamed(context, '/AddHorario');
+                  }),
+            ),
+            Center(
+              child: RaisedButton(
+                  child: Text("Agendar"),
+                  onPressed: () {
+                    // Navigate to the second screen using a named route.
+                    Navigator.pushNamed(context, '/AgendarAula');
+                  }),
+            ),
+            Center(
+              child: RaisedButton(
+                  child: Text("Login"),
+                  onPressed: () {
+                    // Navigate to the second screen using a named route.
+                    Navigator.pushNamed(context, '/Login');
+                  }),
+            ),
+            Center(
+              child: RaisedButton(
+                  child: Text("Cadastrar"),
+                  onPressed: () {
+                    // Navigate to the second screen using a named route.
+                    Navigator.pushNamed(context, '/Cadastro');
+                  }),
+            ),
+            Center(
+              child: RaisedButton(
+                  child: Text("Perfil Usuario"),
+                  onPressed: () {
+                    // Navigate to the second screen using a named route.
+                    Navigator.pushNamed(context, '/PerfilUsuario');
+                  }),
+            ),
+            Center(
+              child: RaisedButton(
+                  child: Text("Listar Usuarios cadastrados"),
+                  onPressed: () {
+                    // Navigate to the second screen using a named route.
+                    Navigator.pushNamed(context, '/ListarPessoas');
+                  }),
+            ),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RaisedButton(
+                    child: Text("Professor"),
+                    onPressed: () {
+                      setState(() {
+                        usuario = Professor(nome: "Professor");
+                      });
+                    },
+                  ),
+                  RaisedButton(
+                    child: Text("Aluno"),
+                    onPressed: () {
+                      setState(() {
+                        usuario = Aluno(nome: "Aluno");
+                      });
+                    },
+                  ),
+                  RaisedButton(
+                    child: Text("Responsavel"),
+                    onPressed: () {
+                      setState(() {
+                        usuario = Responsavel(nome: "Responsavel");
+                      });
+                    },
+                  ),
+                ],
+              ),
+            )
+          ],
+        )),
+        bottomNavigationBar: getBottonBar(context),
+      );
 }
 
 class BoxSelect {
