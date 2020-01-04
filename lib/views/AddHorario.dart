@@ -1,3 +1,4 @@
+import 'package:academia_de_herois/views/partials/partials.dart';
 import 'package:flutter/material.dart';
 import 'package:academia_de_herois/util/Util.dart';
 
@@ -48,7 +49,7 @@ class _PaginaAddHorarioState extends State<PaginaAddHorario> {
     };
     int tipo = tipos[dropDownTipo.itemSelecionado];
     setState(() {
-      status = usuario.addHorario(tipo, horario);
+//      status = usuario.addHorario(tipo, horario);
     });
   }
 
@@ -63,10 +64,7 @@ class _PaginaAddHorarioState extends State<PaginaAddHorario> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Horario Semanal"),
-          centerTitle: true,
-        ),
+        appBar: getAppBar("Adicionar Horario"),
         body: SingleChildScrollView(
             child: Form(
                 key: _formKey,

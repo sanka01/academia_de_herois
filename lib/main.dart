@@ -3,6 +3,10 @@ import 'package:academia_de_herois/views/AddHorario.dart';
 import 'package:academia_de_herois/views/Agendamento.dart';
 import 'package:academia_de_herois/views/Cadastro.dart';
 import 'package:academia_de_herois/views/Login.dart';
+import 'package:academia_de_herois/views/partials/partials.dart';
+import 'package:academia_de_herois/views/perfilUsuario.dart';
+import 'package:academia_de_herois/views/testeDB.dart';
+import 'package:academia_de_herois/views/testeDB2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -14,7 +18,10 @@ void main() => runApp(MaterialApp(
       "/AddHorario": (context) => PaginaAddHorario(),
       "/Login": (context) => PaginaLogin(),
       "/Cadastro": (context) => PaginaCadastro(),
-      "/AgendarAula": (context) => PaginaAgendamento()
+      "/PerfilUsuario": (context) => PaginaPerfilUsuario(),
+      "/AgendarAula": (context) => PaginaAgendamento(),
+      "/TesteDB": (context) => TesteDB(),
+      "/TesteDB2": (context) => TesteDB2(),
     },
     localizationsDelegates: [
       // ... app-specific localization delegate[s] here
@@ -23,8 +30,7 @@ void main() => runApp(MaterialApp(
       GlobalCupertinoLocalizations.delegate,
     ],
     locale: Locale('pt', 'BR'),
-    supportedLocales: {Locale('pt', 'BR'), Locale('en')}
-    ));
+    supportedLocales: {Locale('pt', 'BR'), Locale('en')}));
 
 class PaginaTestes extends StatefulWidget {
   @override
@@ -37,10 +43,7 @@ class _PaginaTestesState extends State<PaginaTestes> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-        title: Text("Testes"),
-        centerTitle: true,
-      ),
+      appBar: getAppBar("Testes"),
       body: SingleChildScrollView(
           child: Column(
         children: <Widget>[
@@ -69,6 +72,39 @@ class _PaginaTestesState extends State<PaginaTestes> {
                   Navigator.pushNamed(context, '/Login');
                 }),
           ),
+          Center(
+            child: RaisedButton(
+                child: Text("Cadastrar"),
+                onPressed: () {
+                  // Navigate to the second screen using a named route.
+                  Navigator.pushNamed(context, '/Cadastro');
+                }),
+          ),
+          Center(
+            child: RaisedButton(
+                child: Text("Perfil Usuario"),
+                onPressed: () {
+                  // Navigate to the second screen using a named route.
+                  Navigator.pushNamed(context, '/PerfilUsuario');
+                }),
+          ),
+          Center(
+            child: RaisedButton(
+                child: Text("Listar Usuario via MySQL1"),
+                onPressed: () {
+                  // Navigate to the second screen using a named route.
+                  Navigator.pushNamed(context, '/TesteDB');
+                }),
+          ),
+          Center(
+            child: RaisedButton(
+                child: Text("Listar Usuario via Requisição JSON"),
+                onPressed: () {
+                  // Navigate to the second screen using a named route.
+                  Navigator.pushNamed(context, '/TesteDB2');
+                }),
+          ),
+
         ],
       )));
 }
@@ -76,15 +112,13 @@ class _PaginaTestesState extends State<PaginaTestes> {
 class BoxSelect {
   List itens;
 
-  String _itemSelecionado;
-
-  String get itemSelecionado => _itemSelecionado;
+  String itemSelecionado;
 
   List<DropdownMenuItem<String>> dropDownItens;
 
   BoxSelect(this.itens, this.dropDownItens) {
     dropDownItens = getDropDownItens();
-    _itemSelecionado = itens.first.toString();
+    itemSelecionado = itens.first.toString();
   }
 
   List<DropdownMenuItem<String>> getDropDownItens() {
@@ -101,7 +135,7 @@ class BoxSelect {
   }
 
   String changedDropDownItem(String itemSelecionado) {
-    _itemSelecionado = itemSelecionado;
-    return _itemSelecionado;
+    itemSelecionado = itemSelecionado;
+    return itemSelecionado;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:academia_de_herois/main.dart';
 import 'package:academia_de_herois/util/Util.dart';
+import 'package:academia_de_herois/views/partials/partials.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -37,9 +38,7 @@ class _PaginaAgendamentoState extends State {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text("Agendamento"),
-        ),
+        appBar: getAppBar("Agendamento"),
         body: SingleChildScrollView(
           child: Form(
             key: _formKey,

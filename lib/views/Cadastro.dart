@@ -1,4 +1,5 @@
 import 'package:academia_de_herois/model/pessoa/Pessoa.dart';
+import 'package:academia_de_herois/views/partials/partials.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class _PaginaCadastroState extends State<PaginaCadastro> {
   void _cadastrar() {
     Pessoa novoUsuario = Pessoa.novoUsuario(nomeController.text,
         telefoneController.text, emailController.text, senhaController.text);
-    if (novoUsuario.salvar()) {
+    if (novoUsuario.salvar(novoUsuario)) {
       setState(() {
         notice = "Usuario Cadastrado com sucesso";
       });
@@ -30,10 +31,7 @@ class _PaginaCadastroState extends State<PaginaCadastro> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-          title: Text("Cadastro "),
-          centerTitle: true,
-          backgroundColor: Color.fromRGBO(42, 173, 170, 1)),
+      appBar: getAppBar("Cadastro"),
       body: SingleChildScrollView(
         child: Form(
             key: _formKey,
@@ -42,15 +40,15 @@ class _PaginaCadastroState extends State<PaginaCadastro> {
               child: Column(
                 children: <Widget>[
                   Image(image: AssetImage("assets/images/logo.png")),
-                  Text("Cadastro",
-                      style: TextStyle(
-                          color: Color.fromRGBO(42, 173, 170, 1),
-                          fontSize: 16)),
+//                  Text("Cadastro",
+//                      style: TextStyle(
+//                          color: Color.fromRGBO(42, 173, 170, 1),
+//                          fontSize: 16)),
                   Text(notice),
                   TextFormField(
                     controller: nomeController,
-                    validator: (value){
-                      if(value.isEmpty){
+                    validator: (value) {
+                      if (value.isEmpty) {
                         return "Nome não pode ser vazio";
                       }
                       return null;
@@ -65,8 +63,8 @@ class _PaginaCadastroState extends State<PaginaCadastro> {
                   TextFormField(
                     controller: telefoneController,
                     keyboardType: TextInputType.phone,
-                    validator: (value){
-                      if(value.isEmpty){
+                    validator: (value) {
+                      if (value.isEmpty) {
                         return "Telefone não pode ser vazio";
                       }
                       return null;
@@ -79,8 +77,8 @@ class _PaginaCadastroState extends State<PaginaCadastro> {
                   ),
                   TextFormField(
                     controller: emailController,
-                    validator: (value){
-                      if(value.isEmpty){
+                    validator: (value) {
+                      if (value.isEmpty) {
                         return "Email não pode ser vazio";
                       }
                       return null;
@@ -94,8 +92,9 @@ class _PaginaCadastroState extends State<PaginaCadastro> {
                   ),
                   TextFormField(
                     controller: senhaController,
+                    keyboardType: TextInputType.visiblePassword,
                     validator: (value) {
-                      if(value.isEmpty){
+                      if (value.isEmpty) {
                         return "A senha não pode ser vazia";
                       }
                       if (value.length < 8) {
@@ -113,11 +112,12 @@ class _PaginaCadastroState extends State<PaginaCadastro> {
                   ),
                   TextFormField(
                     controller: senhaConfirmController,
+                    keyboardType: TextInputType.visiblePassword,
                     validator: (value) {
                       if (senhaController.text != value) {
                         return "As senhas não coincidem";
                       }
-                      if(value.isEmpty){
+                      if (value.isEmpty) {
                         return "A senha não pode ser vazia";
                       }
                       return null;
@@ -131,19 +131,11 @@ class _PaginaCadastroState extends State<PaginaCadastro> {
                   ),
                   Padding(
                       padding: EdgeInsets.only(top: 15),
-                      child: RaisedButton(
-                        color: Color.fromRGBO(42, 173, 170, 1),
-                        padding: EdgeInsets.fromLTRB(40, 5, 40, 5),
-                        child: Text(
-                          "Cadastrar",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            _cadastrar();
-                          }
-                        },
-                      ))
+                      child: botaoVerde("Cadastrar", () {
+                        if (_formKey.currentState.validate()) {
+                          _cadastrar();
+                        }
+                      }))
                 ],
               ),
             )),
