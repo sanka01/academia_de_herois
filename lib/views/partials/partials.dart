@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 final Color verdeAcademia = Color.fromRGBO(42, 173, 170, 1);
 
-getAppBar(String titulo, {TextStyle style}) {
+getAppBar(String titulo) {
   return AppBar(
-    title: Text(titulo, style: style == null? null : style),
+    title: Text(titulo),
     centerTitle: true,
     backgroundColor: verdeAcademia,
   );
@@ -17,114 +17,109 @@ getAppBar(String titulo, {TextStyle style}) {
 getBottonBar(context) {
   return BottomAppBar(
       color: verdeAcademia,
-      child: usuario is Responsavel
-          ? bottonBarResponsavel(context)
-          : usuario is Aluno
-              ? bottonBarAluno(context)
-              : usuario is Professor ? bottonBarProfessor(context) : "");
+      child: Row(
+        children: usuario is Responsavel
+            ? bottonBarResponsavel(context)
+            : usuario is Aluno
+                ? bottonBarAluno(context)
+                : usuario is Professor ? bottonBarProfessor(context) : Text(""),
+      ));
 }
 
 bottonBarProfessor(context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: <Widget>[
-      FlatButton.icon(
+  int qtRows = 8;
+  return <Widget>[
+    FlatButton.icon(
+      onPressed: () {},
+      icon: Icon(
+        Icons.calendar_today,
+        color: Colors.white,
+//        size: MediaQuery.of(context).size.width / qtRows,
+      ),
+      label: Text(""),
+    ),
+    FlatButton.icon(
         onPressed: () {},
         icon: Icon(
-          Icons.calendar_today,
+          Icons.attach_money,
           color: Colors.white,
-          size: MediaQuery.of(context).size.width / 8,
+//          size: MediaQuery.of(context).size.width / qtRows,
         ),
-        label: Text(""),
+        label: Text("")),
+    FlatButton.icon(
+      onPressed: () {},
+      icon: Icon(
+        Icons.chat_bubble,
+        color: Colors.white,
+//        size: MediaQuery.of(context).size.width / qtRows,
       ),
-      FlatButton.icon(
-          onPressed: () {},
-          icon: Icon(
-            Icons.attach_money,
-            color: Colors.white,
-            size: MediaQuery.of(context).size.width / 8,
-          ),
-          label: Text("")),
-      FlatButton.icon(
-        onPressed: () {},
-        icon: Icon(
-          Icons.chat_bubble,
-          color: Colors.white,
-          size: MediaQuery.of(context).size.width / 8,
-        ),
-        label: Text(""),
-      ),
-      botaoPerfil(context, 8)
-    ],
-  );
+      label: Text(""),
+    ),
+    botaoPerfil(context, qtRows),
+  ];
 }
 
 bottonBarAluno(context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: <Widget>[
-      FlatButton.icon(
-        onPressed: () {},
-        icon: Icon(
-          Icons.shopping_basket,
-          color: Colors.white,
-          size: MediaQuery.of(context).size.width / 8,
-        ),
-        label: Text(""),
+  var qtRows = 8;
+  return <Widget>[
+    FlatButton.icon(
+      onPressed: () {},
+      icon: Icon(
+        Icons.shopping_basket,
+        color: Colors.white,
+//        size: MediaQuery.of(context).size.width / qtRows,
       ),
-      FlatButton.icon(
-        onPressed: () {},
-        icon: Icon(
-          Icons.calendar_today,
-          color: Colors.white,
-          size: MediaQuery.of(context).size.width / 8,
-        ),
-        label: Text(""),
+      label: Text(""),
+    ),
+    FlatButton.icon(
+      onPressed: () {},
+      icon: Icon(
+        Icons.calendar_today,
+        color: Colors.white,
+//        size: MediaQuery.of(context).size.width / qtRows,
       ),
-      botaoPerfil(context, 8)
-    ],
-  );
+      label: Text(""),
+    ),
+    botaoPerfil(context, qtRows)
+  ];
 }
 
 bottonBarResponsavel(context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: <Widget>[
-      FlatButton.icon(
-        onPressed: () {},
-        icon: Icon(
-          Icons.shopping_basket,
-          color: Colors.white,
-          size: MediaQuery.of(context).size.width / 8,
-        ),
-        label: Text(""),
+  int qtRows = 8;
+  return <Widget>[
+    FlatButton.icon(
+      onPressed: () {},
+      icon: Icon(
+        Icons.shopping_basket,
+        color: Colors.white,
+//        size: MediaQuery.of(context).size.width / qtRows,
       ),
-      FlatButton.icon(
-        onPressed: () {},
-        icon: Icon(
-          Icons.calendar_today,
-          color: Colors.white,
-          size: MediaQuery.of(context).size.width / 8,
-        ),
-        label: Text(""),
+      label: Text(""),
+    ),
+    FlatButton.icon(
+      onPressed: () {},
+      icon: Icon(
+        Icons.calendar_today,
+        color: Colors.white,
+//        size: MediaQuery.of(context).size.width / qtRows,
       ),
-      FlatButton.icon(
-        onPressed: () {},
-        icon: Icon(
-          Icons.chat_bubble,
-          color: Colors.white,
-          size: MediaQuery.of(context).size.width / 8,
-        ),
-        label: Text(""),
+      label: Text(""),
+    ),
+    FlatButton.icon(
+      onPressed: () {},
+      icon: Icon(
+        Icons.chat_bubble,
+        color: Colors.white,
+//        size: MediaQuery.of(context).size.width / qtRows,
       ),
-      botaoPerfil(context, 8)
-    ],
-  );
+      label: Text(""),
+    ),
+    botaoPerfil(context, qtRows)
+  ];
 }
 
-FlatButton botaoPerfil(context, int botoes) {
+FlatButton botaoPerfil(context, int qtRows) {
   var rota = ModalRoute.of(context).settings.name;
-  debugPrint("rota: $rota");
   return FlatButton.icon(
     onPressed: rota == "/PerfilUsuario"
         ? null
@@ -134,7 +129,7 @@ FlatButton botaoPerfil(context, int botoes) {
     icon: Icon(
       Icons.perm_contact_calendar,
       color: Colors.white,
-      size: MediaQuery.of(context).size.width / botoes,
+//      size: MediaQuery.of(context).size.width / qtRows,
     ),
     label: Text(""),
   );
