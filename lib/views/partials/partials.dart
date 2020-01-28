@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 final Color verdeAcademia = Color.fromRGBO(42, 173, 170, 1);
 
-getAppBar(String titulo) {
+getAppBar(String titulo, {TextStyle style}) {
   return AppBar(
-    title: Text(titulo),
+    title: Text(titulo, style: style == null? null : style),
     centerTitle: true,
     backgroundColor: verdeAcademia,
   );
@@ -33,7 +33,7 @@ bottonBarProfessor(context) {
         icon: Icon(
           Icons.calendar_today,
           color: Colors.white,
-          size: MediaQuery.of(context).size.width / 6,
+          size: MediaQuery.of(context).size.width / 8,
         ),
         label: Text(""),
       ),
@@ -42,7 +42,7 @@ bottonBarProfessor(context) {
           icon: Icon(
             Icons.attach_money,
             color: Colors.white,
-            size: MediaQuery.of(context).size.width / 6,
+            size: MediaQuery.of(context).size.width / 8,
           ),
           label: Text("")),
       FlatButton.icon(
@@ -50,11 +50,11 @@ bottonBarProfessor(context) {
         icon: Icon(
           Icons.chat_bubble,
           color: Colors.white,
-          size: MediaQuery.of(context).size.width / 6,
+          size: MediaQuery.of(context).size.width / 8,
         ),
         label: Text(""),
       ),
-      botaoPerfil(context, 6)
+      botaoPerfil(context, 8)
     ],
   );
 }
@@ -68,7 +68,7 @@ bottonBarAluno(context) {
         icon: Icon(
           Icons.shopping_basket,
           color: Colors.white,
-          size: MediaQuery.of(context).size.width / 6,
+          size: MediaQuery.of(context).size.width / 8,
         ),
         label: Text(""),
       ),
@@ -77,11 +77,11 @@ bottonBarAluno(context) {
         icon: Icon(
           Icons.calendar_today,
           color: Colors.white,
-          size: MediaQuery.of(context).size.width / 6,
+          size: MediaQuery.of(context).size.width / 8,
         ),
         label: Text(""),
       ),
-      botaoPerfil(context, 6)
+      botaoPerfil(context, 8)
     ],
   );
 }
@@ -95,7 +95,7 @@ bottonBarResponsavel(context) {
         icon: Icon(
           Icons.shopping_basket,
           color: Colors.white,
-          size: MediaQuery.of(context).size.width / 6,
+          size: MediaQuery.of(context).size.width / 8,
         ),
         label: Text(""),
       ),
@@ -104,7 +104,7 @@ bottonBarResponsavel(context) {
         icon: Icon(
           Icons.calendar_today,
           color: Colors.white,
-          size: MediaQuery.of(context).size.width / 6,
+          size: MediaQuery.of(context).size.width / 8,
         ),
         label: Text(""),
       ),
@@ -113,11 +113,11 @@ bottonBarResponsavel(context) {
         icon: Icon(
           Icons.chat_bubble,
           color: Colors.white,
-          size: MediaQuery.of(context).size.width / 6,
+          size: MediaQuery.of(context).size.width / 8,
         ),
         label: Text(""),
       ),
-      botaoPerfil(context, 6)
+      botaoPerfil(context, 8)
     ],
   );
 }
@@ -182,13 +182,13 @@ titulo({titulo, subtitulo}) {
         Row(
           children: <Widget>[
             Text(
-              titulo,
+              titulo == null ? "" : titulo,
               style: TextStyle(color: verdeAcademia, fontSize: 18),
             ),
             Padding(
               padding: EdgeInsets.only(left: 10),
               child: Text(
-                subtitulo,
+                subtitulo == null ? "" : subtitulo,
                 style: TextStyle(
                   fontSize: 10,
                 ),

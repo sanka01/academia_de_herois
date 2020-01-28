@@ -3,17 +3,21 @@ import 'package:academia_de_herois/model/pessoa/Responsavel.dart';
 import 'package:academia_de_herois/util/Util.dart';
 import 'package:academia_de_herois/views/AddHorario.dart';
 import 'package:academia_de_herois/views/Agendamento.dart';
+import 'package:academia_de_herois/views/AulasAgendadasProfessor.dart';
 import 'package:academia_de_herois/views/Cadastro.dart';
 import 'package:academia_de_herois/views/Login.dart';
 import 'package:academia_de_herois/views/partials/partials.dart';
 import 'package:academia_de_herois/views/perfilUsuario.dart';
 import 'package:academia_de_herois/views/ListarPessoas.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'model/pessoa/Aluno.dart';
 
-void main() => runApp(MaterialApp(
+void main() {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(MaterialApp(
     title: "Academia de Herois",
     debugShowCheckedModeBanner: false,
     checkerboardOffscreenLayers: true,
@@ -26,6 +30,7 @@ void main() => runApp(MaterialApp(
       "/PerfilUsuario": (context) => PaginaPerfilUsuario(),
       "/AgendarAula": (context) => PaginaAgendamento(),
       "/ListarPessoas": (context) => ListarPessoas(),
+      "/AulasAgendadasProfessor": (context) => AulasAgendadasProfessor(),
     },
     localizationsDelegates: [
       // ... app-specific localization delegate[s] here
@@ -35,6 +40,7 @@ void main() => runApp(MaterialApp(
     ],
     locale: Locale('pt', 'BR'),
     supportedLocales: {Locale('pt', 'BR'), Locale('en')}));
+}
 
 class PaginaTestes extends StatefulWidget {
   @override
@@ -101,6 +107,14 @@ class _PaginaTestesState extends State<PaginaTestes> {
                   onPressed: () {
                     // Navigate to the second screen using a named route.
                     Navigator.pushNamed(context, '/ListarPessoas');
+                  }),
+            ),
+            Center(
+              child: RaisedButton(
+                  child: Text("Aulas Agendadas"),
+                  onPressed: () {
+                    // Navigate to the second screen using a named route.
+                    Navigator.pushNamed(context, '/AulasAgendadasProfessor');
                   }),
             ),
             Center(
